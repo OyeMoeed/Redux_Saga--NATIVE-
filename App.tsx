@@ -9,10 +9,12 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import store from './redux/store';
 import MainView from './screen/MainView';
+import HeaderFile from './screen/HeaderFile';
 const App = () => {
   return (
     <Provider store={store}>
       <SafeAreaView style={styles.container}>
+        <HeaderFile />
         <MainView />
       </SafeAreaView>
     </Provider>
