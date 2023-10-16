@@ -17,6 +17,5 @@ export const clearCart = data => {
   console.log('Button Pressed', data);
   return {
     type: CLEAR_CART,
-    data,
   };
 };

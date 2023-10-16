@@ -4,6 +4,7 @@ import React from 'react';
 
 //
 import {addToCart, removeFromCart, clearCart} from '../redux/action';
+import list from '../redux/productAction';
 import {useDispatch} from 'react-redux';
 export default function MainView() {
   const dispatch = useDispatch();
@@ -25,8 +26,9 @@ export default function MainView() {
       />
       <Button
         title="CLEAR CART"
-        onPress={() => dispatch(clearCart(productData.name))}
+        onPress={() => dispatch(clearCart(productData))}
       />
+      <Button title="ITEM LIST" onPress={() => dispatch(list())} />
     </View>
   );
 }
