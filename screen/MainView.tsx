@@ -1,37 +1,37 @@
-import {Button, StyleSheet, TouchableOpacity} from 'react-native';
-import {View, Text} from 'react-native';
 import React, {useEffect} from 'react';
-
-//
+import {View, Text, Button, StyleSheet} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
 import {addToCart, removeFromCart, clearCart} from '../redux/action';
 import list from '../redux/productAction';
-import {useDispatch, useSelector} from 'react-redux';
+
 export default function MainView() {
   const dispatch = useDispatch();
-  const data = useSelector(state => state.productData);
+  const data = useSelector(state => state.listData) || [];
+  console.log('data in main component', data);
 
   useEffect(() => {
     dispatch(list());
   }, []);
+
   return (
     <View style={style.main}>
-      <View>
-        {data &&
-          data.map(item => (
-            <View key={item.id}>
-              <View>Name: {item.name}</View>
-              <Text>Company: {item.company}</Text>
-              <Text>Model: {item.model}</Text>
-              <Button
-                title="ADD TO CART"
-                onPress={() => dispatch(addToCart(item))}
-              />
-              <Button
-                title="REMOVE FROM CART"
-                onPress={() => dispatch(removeFromCart(item.id))}
-              />
-            </View>
-          ))}
+      <View style={style.listView}>
+        {data.map(item => (
+          <View key={item.id}>
+            <Text>NAME : {item.name}</Text>
+            <Text>Company : {item.company}</Text>
+            <Text>Model : {item.model}</Text>
+
+            <Button
+              title="ADD TO CART"
+              onPress={() => dispatch(addToCart(item))}
+            />
+            <Button
+              title="Remove From Cart"
+              onPress={() => dispatch(removeFromCart(item.id))}
+            />
+          </View>
+        ))}
       </View>
       <View>
         <Button title="CLEAR CART" onPress={() => dispatch(clearCart())} />
@@ -41,7 +41,10 @@ export default function MainView() {
 }
 
 const style = StyleSheet.create({
-  main: {
-    display: 'flex',
+  main: {alignItems: 'center'},
+  listView: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });

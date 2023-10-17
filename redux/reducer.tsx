@@ -8,8 +8,8 @@ const cartData = (data = [], action) => {
     }
     case REMOVE_FROM_CART: {
       console.log('REMOVED FROM CART', action);
-      data.length = data.length ? data.length - 1 : [];
-      return [...data];
+      const remainingItems = data.filter(item => item.id !== action.data);
+      return [...remainingItems];
     }
     case CLEAR_CART: {
       console.log('CART CLEARED', action);

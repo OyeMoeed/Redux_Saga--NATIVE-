@@ -12,12 +12,14 @@ import MainView from './screen/MainView';
 import HeaderFile from './screen/HeaderFile';
 const App = () => {
   return (
-    <Provider store={store}>
-      <SafeAreaView style={styles.container}>
-        <HeaderFile />
-        <MainView />
-      </SafeAreaView>
-    </Provider>
+    <React.StrictMode>
+      <Provider store={store}>
+        <SafeAreaView style={styles.container}>
+          <HeaderFile />
+          <MainView />
+        </SafeAreaView>
+      </Provider>
+    </React.StrictMode>
   );
 };
 
