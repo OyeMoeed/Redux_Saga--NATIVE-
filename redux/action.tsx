@@ -13,8 +13,8 @@ export const removeFromCart = data => {
     data,
   };
 };
-export const clearCart = data => {
-  console.log('Button Pressed', data);
+export const clearCart = () => {
+  console.log('Button Pressed');
   return {
     type: CLEAR_CART,
   };

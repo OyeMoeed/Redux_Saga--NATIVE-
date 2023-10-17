@@ -1,6 +1,8 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
-import {UseSelector, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
+
+
 const HeaderFile = () => {
   const result = useSelector(state => state.cartData);
   console.log('header data', result);

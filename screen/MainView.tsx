@@ -1,34 +1,41 @@
 import {Button, StyleSheet, TouchableOpacity} from 'react-native';
 import {View, Text} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 
 //
 import {addToCart, removeFromCart, clearCart} from '../redux/action';
 import list from '../redux/productAction';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 export default function MainView() {
   const dispatch = useDispatch();
+  const data = useSelector(state => state.productData);
 
-  const productData = {
-    name: 'Iphone 13 NON PTA',
-    price: '330000 pkr',
-    unit: '10',
-  };
+  useEffect(() => {
+    dispatch(list());
+  }, []);
   return (
     <View style={style.main}>
-      <Button
-        title="ADD TO CART"
-        onPress={() => dispatch(addToCart(productData.name))}
-      />
-      <Button
-        title="REMOVE FROM CART"
-        onPress={() => dispatch(removeFromCart(productData.name))}
-      />
-      <Button
-        title="CLEAR CART"
-        onPress={() => dispatch(clearCart(productData))}
-      />
-      <Button title="ITEM LIST" onPress={() => dispatch(list())} />
+      <View>
+        {data &&
+          data.map(item => (
+            <View key={item.id}>
+              <View>Name: {item.name}</View>
+              <Text>Company: {item.company}</Text>
+              <Text>Model: {item.model}</Text>
+              <Button
+                title="ADD TO CART"
+                onPress={() => dispatch(addToCart(item))}
+              />
+              <Button
+                title="REMOVE FROM CART"
+                onPress={() => dispatch(removeFromCart(item.id))}
+              />
+            </View>
+          ))}
+      </View>
+      <View>
+        <Button title="CLEAR CART" onPress={() => dispatch(clearCart())} />
+      </View>
     </View>
   );
 }
